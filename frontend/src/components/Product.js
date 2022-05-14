@@ -17,13 +17,13 @@ function Product({product}) {
             </Link>
             <Card.Text as="div">
                 <div className='my-3'> 
-                    <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8E825'}/>
+                    <Rating value={product.rating} text={`${product.numReviews} avaliações`} color={'#f8E825'}/>
                     
                 </div>
             </Card.Text>
 
             <Card.Text as='h3'>
-                ${product.price}
+                R${product.price}
             </Card.Text>
         </Card.Body>
     </Card>

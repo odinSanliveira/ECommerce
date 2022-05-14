@@ -48,15 +48,10 @@ function ProductScreen() {
                   </ListGroup.Item>
 
                   <ListGroup.Item>
-                    <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#F8E825'} />
+                    <Rating value={product.rating} text={` ${product.numReviews} avaliações`} color={'#F8E825'} />
                   </ListGroup.Item>
-
                   <ListGroup.Item>
-                    Price: ${product.price}
-                  </ListGroup.Item>
-
-                  <ListGroup.Item>
-                    Description: ${product.description}
+                    Descrição: {product.description}
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
@@ -65,9 +60,9 @@ function ProductScreen() {
                   <ListGroup variant='flush'>
                     <ListGroup.Item>
                       <Row>
-                        <Col>Price:</Col>
+                        <Col>Preço:</Col>
                         <Col>
-                          <strong>${product.price}</strong>
+                          <strong>R${product.price}</strong>
 
                         </Col>
                       </Row>
