@@ -11,25 +11,25 @@ import { useNavigate, useLocation } from 'react-router-dom';
 function LoginScreen() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const history = useNavigate();
-    const { search } = useLocation();
+    const history = useNavigate()
+    const { search } = useLocation()
 
     const dispatch = useDispatch()
-    const redirect = search.pathname ? search.split('=')[1] : '/'
+    const redirect = search ? search.split('=')[1] : '/'
 
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
     useEffect(() => {
+        
         if (userInfo) {
-            history.push(redirect)
+            history(redirect)
         }
-    }, [history, userInfo, redirect])
+    }, [search, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(login(email, password))
-        console.log('url: ', redirect)
+        dispatch(login(email, password))        
     }
 
     return (
