@@ -5,7 +5,7 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useDispatch, useSelector } from 'react-redux'
-import { listProductDetailsAction } from '../actions/productActions'
+import { listProductDetails } from '../actions/productActions'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,7 +20,7 @@ function ProductScreen() {
   const {loading, error, product} = productDetails
   
   useEffect(() => {
-    dispatch(listProductDetailsAction(id))  
+    dispatch(listProductDetails(id))
   }, [dispatch, id])
 
   const addToCartHandler = () => {
