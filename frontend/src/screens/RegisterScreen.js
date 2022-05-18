@@ -6,8 +6,9 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function RegisterScreen({ location, history }) {
+function RegisterScreen() {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -15,23 +16,23 @@ function RegisterScreen({ location, history }) {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
 
+    const history = useNavigate
+    const { search } = useLocation()
     const dispatch = useDispatch()
-
-    const redirect = location.search ? location.search.split('=')[1] : '/'
-
+    const redirect = search ? search.split('=')[1] : '/'
     const userRegister = useSelector(state => state.userRegister)
     const { error, loading, userInfo } = userRegister
 
     useEffect(() => {
         if (userInfo) {
-            history.push(redirect)
+            history(redirect)
         }
     }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
             setMessage('Passwords do not match')
         } else {
             dispatch(register(name, email, password))
@@ -94,10 +95,12 @@ function RegisterScreen({ location, history }) {
                     >
                     </Form.Control>
                 </Form.Group>
+                <Row className='py-4'>
 
-                <Button type='submit' variant='primary'>
-                    Register
-                </Button>
+                    <Button type='submit' variant='primary'>
+                        Register
+                    </Button>
+                </Row>
 
             </Form>
 
