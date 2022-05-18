@@ -32,7 +32,7 @@ export default function CartScreen() {
     dispatch(removeFromCart(id))
   }
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
+    history('/login?redirect=shipping')
   }
     
   return (
