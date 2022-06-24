@@ -20,12 +20,11 @@ function LoginScreen() {
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
 
-    useEffect(() => {
-        
+    useEffect(() => {        
         if (userInfo) {
             history(redirect)
         }
-    }, [search, userInfo, redirect])
+    }, [history, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
