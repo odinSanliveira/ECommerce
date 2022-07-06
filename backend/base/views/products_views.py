@@ -73,6 +73,7 @@ def uploadImage(request):
     product = Product.objects.get(_id=product_id)
 
     product.image = request.FILES.get('image')
+    #implant resize methods here later -rh
     product.save()
 
     return Response('Image was uploaded')
