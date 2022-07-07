@@ -71,7 +71,6 @@ def getMyOrders(request):
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getOrders(request):
@@ -108,6 +107,7 @@ def updateOrderToPaid(request, pk):
     order.save()
 
     return Response('Order was paid')
+
 
 
 @api_view(['PUT'])

@@ -1,3 +1,8 @@
+#from PIL import Image
+#import os
+#import PIL
+#import glob
+
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -36,6 +41,67 @@ def getProductsId(request, pk):
     return Response(serializer.data)
 
 @api_view(['POST'])
+
+@permission_classes([IsAdminUser])
+def createProduct(request):
+    user = request.user
+
+    product = Product.objects.create(
+        user=user,
+        name='Sample Name',
+        price=0,
+        brand='Sample Brand',
+        countInStock=0,
+        category='Sample Category',
+        description='test'
+    )
+
+
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getProductsId(request, pk):
+    data = request.data
+    product = Product.objects.get(_id=pk)
+
+    product.name = data['name']
+    product.price = data['price']
+    product.brand = data['brand']
+    product.countInStock = data['countInStock']
+    product.category = data['category']
+    product.description = data['description']
+
+    product.save()
+
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+    return Response('Product Deleted')
+
+@api_view(['POST'])
+def uploadImage(request):
+    fixed_height = 320
+    data = request.data
+
+    product_id = data['product_id']
+    product = Product.objects.get(_id=product_id)
+
+    product.image = request.FILES.get('image')
+    #height_percent = (fixed_height / float(product.image.size[1]))
+    #width_size = int((float(product.image.size[0]) * float(height_percent)))
+    #product.image = product.image.resize((width_size, fixed_height), PIL.Image.NEAREST)
+
+    product.save()
+
+    return Response('Image was uploaded')
+
 @permission_classes([IsAuthenticated])
 def createProductReview(request, pk):
     user = request.user
@@ -74,3 +140,4 @@ def createProductReview(request, pk):
         product.save()
 
         return Response('Review Added')
+

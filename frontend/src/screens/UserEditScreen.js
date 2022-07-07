@@ -13,6 +13,7 @@ function UserEditScreen() {
     const {userId} = useParams()
     const history = useNavigate()
 
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
@@ -31,8 +32,8 @@ function UserEditScreen() {
             dispatch({ type: USER_UPDATE_RESET })
             history('/admin/userlist')
         } else {
-
             if (!user.name || user.id !== Number(userId)) {
+
                 dispatch(getUserDetails(userId))
             } else {
                 setName(user.name)
@@ -45,7 +46,8 @@ function UserEditScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(updateUser({ _id: user.id, name, email, isAdmin }))
+
+        dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
     }
 
     return (
