@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
@@ -8,9 +8,11 @@ import FormContainer from '../components/FormContainer'
 import { getUserDetails, updateUser } from '../actions/userActions'
 import { USER_UPDATE_RESET } from '../constants/userConstants'
 
-function UserEditScreen({ match, history }) {
+function UserEditScreen() {
 
-    const userId = match.params.id
+    const {userId} = useParams()
+    const history = useNavigate()
+
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -30,8 +32,8 @@ function UserEditScreen({ match, history }) {
             dispatch({ type: USER_UPDATE_RESET })
             history('/admin/userlist')
         } else {
+            if (!user.name || user.id !== Number(userId)) {
 
-            if (!user.name || user._id !== Number(userId)) {
                 dispatch(getUserDetails(userId))
             } else {
                 setName(user.name)
@@ -44,6 +46,7 @@ function UserEditScreen({ match, history }) {
 
     const submitHandler = (e) => {
         e.preventDefault()
+
         dispatch(updateUser({ _id: user._id, name, email, isAdmin }))
     }
 

@@ -7,22 +7,27 @@ import Message from '../components/Message'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
+import { useNavigate, useLocation } from 'react-router-dom'
 function HomeScreen() {
+
   const dispatch = useDispatch()
   const productList = useSelector(state => state.productList)
-  const {error, loading, products} = productList
+  const { error, loading, products } = productList
+
+  const { search } = useLocation();
+  console.log('log history: ', search)
   useEffect(() => {
-    dispatch(listProducts())
-  }, [dispatch])
+    dispatch(listProducts(search))
+  }, [dispatch, search])
 
   return (
     <div>
 
       <h1>Latest Products</h1>
       {
-        loading? <Loader/>
+        loading ? <Loader />
           : error ? <Message variant='danger'>{error}</Message>
-            : 
+            :
             <Row>
               {(products || []).map(product => (
                 <Col key={product._id} sm={12} md={6} lg={3}>
@@ -31,6 +36,7 @@ function HomeScreen() {
               ))}
             </Row>
       }
+      <h1>{search}</h1>
     </div>
   )
 }
