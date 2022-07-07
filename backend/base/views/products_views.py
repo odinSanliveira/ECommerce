@@ -1,3 +1,8 @@
+#from PIL import Image
+#import os
+#import PIL
+#import glob
+
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -67,13 +72,17 @@ def deleteProduct(request, pk):
 
 @api_view(['POST'])
 def uploadImage(request):
+    fixed_height = 320
     data = request.data
 
     product_id = data['product_id']
     product = Product.objects.get(_id=product_id)
 
     product.image = request.FILES.get('image')
-    #implant resize methods here later -rh
+    #height_percent = (fixed_height / float(product.image.size[1]))
+    #width_size = int((float(product.image.size[0]) * float(height_percent)))
+    #product.image = product.image.resize((width_size, fixed_height), PIL.Image.NEAREST)
+
     product.save()
 
     return Response('Image was uploaded')
