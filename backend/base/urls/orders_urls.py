@@ -3,7 +3,11 @@ from django.urls import path
 from base.views import orders_views as views
 
 urlpatterns = [
+    path('', views.getOrders, name='orders'),
     path('add/', views.addOrdersItems, name='orders-add'),
-    path('', views.getMyOrders, name='orders')
+    path('myorders/', views.getMyOrders, name='myorders'),
+
+
+    path('<str:pk>/deliver/', views.updateOrderToDelivered, name='order-delivered'),
 ]
 
