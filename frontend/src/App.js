@@ -19,7 +19,6 @@ import OrderListScreen from './screens/OrderListScreen'
 
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import UserEditScreen from './screens/UserEditScreen'
 
 function App() {
   return (
