@@ -43,7 +43,7 @@ function App() {
             <Route path='/admin/product/:id/edit' element={<ProductEditScreen/>} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
             <Route path='/admin/orderlist' element={<OrderListScreen/>} />
-            <Route path='/order/:id' element={<OrderScreen/>} />
+            <Route path='/order/:orderId' element={<OrderScreen/>} />
           </Routes>
         </Container>
       </main>

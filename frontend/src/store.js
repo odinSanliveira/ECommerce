@@ -13,7 +13,13 @@ import {
     
 } from './reducers/userReducers'
 
-import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productUpdateReducer } from './reducers/productReducers'
+import { 
+    productCreateReducer, 
+    productDeleteReducer, 
+    productDetailsReducer, 
+    productListReducer, 
+    productUpdateReducer,
+    productReviewCreateReducer } from './reducers/productReducers'
 
 import {cartReducer} from './reducers/cartReducers'
 import {

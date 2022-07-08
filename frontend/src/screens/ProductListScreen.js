@@ -90,7 +90,7 @@ function ProductListScreen() {
                             </thead>
 
                             <tbody>
-                                {product.map(product => (
+                                {products.map(product => (
                                     <tr key={product.id}>
                                         <td>{product.id}</td>
                                         <td>{product.name}</td>
