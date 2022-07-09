@@ -13,7 +13,7 @@ function ProductListScreen() {
     const dispatch = useDispatch()
     const history = useNavigate()
 
-    const productList = useSelector(state => state.userList)
+    const productList = useSelector(state => state.productList)
     const { loading, error, products } = productList
 
     const productCreate = useSelector(state => state.productCreate)
