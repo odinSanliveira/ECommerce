@@ -27,7 +27,7 @@ function Header() {
 
             <SearchBox />
             
-            <Nav className="mr-auto">
+            <Nav className="ml-auto">
               <LinkContainer to="/cart">
                 <Nav.Link ><i className="fas fa-shopping-cart"></i> Carrinho</Nav.Link>
               </LinkContainer>
