@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
@@ -10,9 +10,10 @@ import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 
-function ProductEditScreen({ match, history }) {
+function ProductEditScreen() {
 
-    const productId = match.params.id
+    const {productId} = useParams()
+    const history = useNavigate()
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -48,7 +49,7 @@ function ProductEditScreen({ match, history }) {
                 setCategory(product.category)
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
-
+                
             }
         }
 
@@ -85,10 +86,7 @@ function ProductEditScreen({ match, history }) {
                     'Content-Type': 'multipart/form-data'
                 }
             }
-
             const { data } = await axios.post('/api/products/upload/', formData, config)
-
-
             setImage(data)
             setUploading(false)
 
@@ -150,7 +148,6 @@ function ProductEditScreen({ match, history }) {
 
                                 <Form.File
                                     id='image-file'
-                                    label='Choose File'
                                     custom
                                     onChange={uploadFileHandler}
                                 >
@@ -211,7 +208,7 @@ function ProductEditScreen({ match, history }) {
 
 
                             <Button type='submit' variant='primary'>
-                                Update
+                                Salvar
                         </Button>
 
                         </Form>
