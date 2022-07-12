@@ -15,7 +15,7 @@ function HomeScreen() {
   const { error, loading, products } = productList
 
   const { search } = useLocation();
-  console.log('log history: ', search)
+
   useEffect(() => {
     dispatch(listProducts(search))
   }, [dispatch, search])
