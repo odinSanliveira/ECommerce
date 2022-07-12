@@ -22,6 +22,7 @@ function ProductListScreen() {
     const productDelete = useSelector(state => state.productDelete)
     const { loading:loadingDelete, error:errorDelete, success:successDelete } = productDelete
 
+    
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -34,11 +35,11 @@ function ProductListScreen() {
         }
 
         if(successCreate){
-            history('/admin/product/${createdProduct._id}/edit')
+            history(`/admin/product/${createdProduct._id}/edit`)
         }else{
             dispatch(listProducts())
         }
-    }, [dispatch, history, successDelete, userInfo, successCreate, createProduct])
+    }, [dispatch, history, successDelete, userInfo, successCreate, createdProduct])
 
 
     const deleteHandler = (id) => {
@@ -48,7 +49,7 @@ function ProductListScreen() {
         }
     }
 
-    const createProductHandler = (product) => {
+    const createProductHandler = () => {
         //Create product
         dispatch(createProduct())
     }
@@ -91,22 +92,22 @@ function ProductListScreen() {
 
                             <tbody>
                                 {products.map(product => (
-                                    <tr key={product.id}>
-                                        <td>{product.id}</td>
+                                    <tr key={product._id}>
+                                        <td>{product._id}</td>
                                         <td>{product.name}</td>
-                                        <td>${product.email}</td>
+                                        <td>${product.price}</td>                                        
                                         <td>{product.category}</td>
                                         <td>{product.brand}</td>
 
 
                                         <td>
-                                            <LinkContainer to={`/admin/product/${product.id}/edit`}>
+                                            <LinkContainer to={`/admin/product/${product._id}/edit`}>
                                                 <Button variant='light' className='btn-sm'>
                                                     <i className='fas fa-edit'></i>
                                                 </Button>
                                             </LinkContainer>
 
-                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product.id)}>
+                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
                                                 <i className='fas fa-trash'></i>
                                             </Button>
                                         </td>
