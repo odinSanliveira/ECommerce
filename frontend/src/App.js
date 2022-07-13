@@ -10,12 +10,12 @@ import ProfileScreen from './screens/ProfileScreen'
 import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
-// import OrderScreen from './screens/OrderScreen'
-// import UserListScreen from './screens/UserListScreen'
-// import UserEditScreen from './screens/UserEditScreen'
-// import ProductListScreen from './screens/ProductListScreen'
-// import ProductEditScreen from './screens/ProductEditScreen'
-// import OrderListScreen from './screens/OrderListScreen'
+import UserListScreen from './screens/UserListScreen'
+import OrderScreen from './screens/OrderScreen'
+import UserEditScreen from './screens/UserEditScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import ProductEditScreen from './screens/ProductEditScreen'
+import OrderListScreen from './screens/OrderListScreen'
 
 import { Container } from 'react-bootstrap'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -38,17 +38,12 @@ function App() {
             <Route path='/profile' element={<ProfileScreen/>} />
             <Route path='/payment' element={<PaymentScreen/>} />
             <Route path='/placeorder' element={<PlaceOrderScreen/>} />
-            {/* 
-            
-            <Route path='/order/:id' component={OrderScreen} />
-           
-            <Route path='/admin/userlist' component={UserListScreen} />
-            <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-
-            <Route path='/admin/productlist' component={ProductListScreen} />
-            <Route path='/admin/product/:id/edit' component={ProductEditScreen} />
-
-            <Route path='/admin/orderlist' component={OrderListScreen} /> */}
+            <Route path='/admin/userlist' element={<UserListScreen/>} />
+            <Route path='/admin/productlist' element={<ProductListScreen/>} />
+            <Route path='/admin/product/:productId/edit' element={<ProductEditScreen/>} />
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
+            <Route path='/admin/orderlist' element={<OrderListScreen/>} />
+            <Route path='/order/:orderId' element={<OrderScreen/>} />
           </Routes>
         </Container>
       </main>
