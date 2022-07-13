@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+
+    backend:
+        build: backend
+        restart: unless-stopped
+
+    frontend:
+        build: frontend
+        restart: unless-stopped
+
+    nginx:
+        container_name: nginx
+        build: nginx
+        restart: unless-stopped
+        ports:
+            - 80:80
+        depends_on:
+           - backend
+           - frontend
