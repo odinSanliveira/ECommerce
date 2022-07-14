@@ -1,5 +1,5 @@
 # using a python small basic image
-FROM python:3.8.13-alpine3.15
+FROM python:3.8.13
 
 # exposing our app port in docker internal network
 EXPOSE 8000
