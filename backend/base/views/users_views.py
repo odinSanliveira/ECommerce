@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -13,6 +15,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
@@ -21,6 +25,8 @@ def getUserProfile(request):
 
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 @permission_classes([IsAdminUser])
 def getUsersById(request, pk):
     user = User.objects.get(id=pk)
@@ -28,6 +34,8 @@ def getUsersById(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 @permission_classes([IsAdminUser])
 def getUsers(request):
     user = User.objects.all()

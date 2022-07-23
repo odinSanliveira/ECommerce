@@ -1,6 +1,8 @@
 from urllib import response
 from django.shortcuts import render
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -65,6 +67,8 @@ def addOrdersItems(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+@vary_on_cookie
+@cache_page(60*60)
 def getMyOrders(request):
     user = request.user
     orders = user.order_set.all()
@@ -73,6 +77,7 @@ def getMyOrders(request):
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
+@cache_page(60*60)
 def getOrders(request):
     orders = Order.objects.all()
     serializer = OrderSerializer(orders, many=True)
@@ -81,6 +86,8 @@ def getOrders(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+@vary_on_cookie
+@cache_page(60*60)
 def getOrderById(request, pk):
 
     user = request.user

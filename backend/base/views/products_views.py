@@ -6,6 +6,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 from ..products import products
 from ..models import Product, Review
 from ..serializers import ProductSerializer
@@ -18,6 +20,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 def getProducts(request):
     query = request.query_params.get('keyword')
     if query == None:
@@ -28,12 +32,16 @@ def getProducts(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 def getTopProducts(request):
     products = Product.objects.filter(rating__gte=4).order_by('-rating')[0:5]
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
+@vary_on_cookie
+@cache_page(60*60)
 def getProductsId(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
